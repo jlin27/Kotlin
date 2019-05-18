@@ -12,8 +12,7 @@ import java.util.*
 fun main(args: Array<String>) {
 
     // Prompt use to input number of times to play the game.
-    println("Let's play Rock, Paper, Scissors! Please enter a move.\n"
-                +"Enter the number of times to play the game.")
+    println("Let's play Rock, Paper, Scissors! Enter the number of times to play the game.")
     
     // Read in number of times to play game. Input cannot be null.
     val numPlays:Int = readLine()!!.toInt()
