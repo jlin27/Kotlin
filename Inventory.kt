@@ -5,7 +5,7 @@
  * calculatethe total number of products, and read/write inventory data to a file.
  */
 
-// Import File package to use for reaading/writing data to file
+// Import File package to use for reading/writing data to file
 import java.io.File
 
 fun main(args: Array<String>){
