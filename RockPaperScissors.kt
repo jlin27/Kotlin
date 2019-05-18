@@ -1,4 +1,3 @@
-
 /**
  * This project is an implementation of the classic game Rock Paper Scissors.
  * The user inputs the number of times the game runs.
@@ -13,6 +12,8 @@ fun main(args: Array<String>) {
 
     // Prompt use to input number of times to play the game.
     println("Let's play Rock, Paper, Scissors! Enter the number of times to play the game.")
+    println("-------------------------------------------------------")
+
     
     // Read in number of times to play game. Input cannot be null.
     val numPlays:Int = readLine()!!.toInt()
