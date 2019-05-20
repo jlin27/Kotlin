@@ -20,7 +20,7 @@ fun main(args: Array<String>){
     inventoryList.addProduct("tea", 3, 1, 5, fileName)
     inventoryList.addProduct("coffee", 4, 2, 10, fileName)
     
-    // Writes/reads inventory data to specified file.
+    // Writes inventory data to specified file then reads the information to screen.
     inventoryList.printInventory(fileName)
 }
 
@@ -39,6 +39,7 @@ class Inventory(){
     
     
     // Adds a product to the inventory and writes product data to specified file.
+    // Note: Nothing is printed to screen because the data is not read from the file yet. 
     fun addProduct(name:String, price:Int, id:Int, quantity:Int, fileName:String){
         inventoryList.add(Product(name, price, id, quantity))
 
@@ -74,9 +75,8 @@ class Inventory(){
         return totalQuantity
     }
     
-    // Prints all products in inventory list, the total inventory value
-    // and the total inventory quantity. Takes in a file name the
-    // data will be printed to.
+    // Writes the total inventory value and total inventory quantity to a specified file. 
+    // Then reads all the data that has been written to that file and prints it to screen. 
     fun printInventory(fileName:String){
 
       // Calculates the total value and total quantity.
