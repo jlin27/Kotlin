@@ -1,53 +1,61 @@
-/** Kotlin Inventory Project Code
- * Simple inventory tracking app.
+/**
+ * Kotlin Inventory Project Code
  * User can create new Products and add them to an Inventory ArrayList.
  * There are also functions to calculate the total value of the inventory
- * calculatethe total number of products, and read/write inventory data to a file.
+ * calculate the total number of products, and read/write inventory data to a file.
  */
 
-// Import File package to use for reading/writing data to file
+// Imports File package to use for reading/writing data to file.
 import java.io.File
 
 fun main(args: Array<String>){
 
-    // Create an Inventory object
+    // Setup file name.
+    var fileName = "inventory.txt"
+
+    // Creates an Inventory object.
     var inventoryList = Inventory()
     
-    // Add sample products
-    inventoryList.addProduct("tea", 3, 1, 5)
-    inventoryList.addProduct("coffee", 4, 2, 10)
+    // Adds sample products and write data to specified file.
+    inventoryList.addProduct("tea", 3, 1, 5, fileName)
+    inventoryList.addProduct("coffee", 4, 2, 10, fileName)
     
-    // Read/write inventory datai to specified file
-    inventoryList.printInventory("inventory.txt")
+    // Writes/reads inventory data to specified file.
+    inventoryList.printInventory(fileName)
 }
 
-// Setup Product class
-class Product(val name:String, val price:Int, val id:Int, val quantity:Int){
-   
-   // Initializer block that runs during an instance initialization
-   init {
-        println("Product Name: $name")
-        println("Product Price: $$price")
-        println("Product ID: $id")
-        println("Product Quantity: $quantity")
-        println("---------------------------")
-    }
+// Setup Person class and declare and initialize properties from the primary constructor.
+class Product(var name:String, var price:Int, var id:Int, var quantity:Int){
+
 }
 
-// Setup Inventory class
+// Setup Inventory class.
 class Inventory(){
 
-    //Creating an empty arraylist  
+    // Creates an empty arraylist.  
     var inventoryList = ArrayList<Product>()
     var totalValue = 0
-     var totalQuantity = 0
+    var totalQuantity = 0
     
     
-    // Add a product to the inventory
-    fun addProduct(name:String, price:Int, id:Int, quantity:Int){
+    // Adds a product to the inventory and writes product data to specified file.
+    fun addProduct(name:String, price:Int, id:Int, quantity:Int, fileName:String){
         inventoryList.add(Product(name, price, id, quantity))
+
+        var contentName:String = "Product Name: $name\n"
+        var contentPrice:String = "Product Price: $$price\n"
+        var contentID:String = "Product ID: $id\n"
+        var contentQuantity:String = "Product Quantity: $quantity\n"
+        var contentDivider:String = "---------------------------\n"
+
+        File(fileName).appendText(contentName)
+        File(fileName).appendText(contentPrice)
+        File(fileName).appendText(contentID)
+        File(fileName).appendText(contentQuantity)
+        File(fileName).appendText(contentDivider)
+
     }
-    // Loop through Inventory list to calculate and return total value
+    // Loops through Inventory list to calculate and returns total value.
     fun calculateValue():Int{
         totalValue = 0
         for (obj in inventoryList){
@@ -56,8 +64,8 @@ class Inventory(){
         return totalValue
     } 
     
-    // Loop through Inventory list to calculate and return total product
-    // quantity
+    // Loops through Inventory list to calculate and returns total product
+    // quantity.
     fun calculateQuantity():Int{
         totalQuantity = 0
         for (obj in inventoryList){
@@ -70,22 +78,19 @@ class Inventory(){
     // and the total inventory quantity. Takes in a file name the
     // data will be printed to.
     fun printInventory(fileName:String){
-    
-        // Calculate the total value and total quantity
+
+      // Calculates the total value and total quantity.
         totalValue = calculateValue()
         totalQuantity = calculateQuantity()
-    
-        // Prints data  to a specified file. 
-        val myfile = File(fileName)
-        myfile.printWriter().use { out ->
         
-        for (obj in inventoryList){
-            out.println("Product Name: ${obj.name}")
-        }
-        out.println("Inventory Value: $$totalValue")
-        out.println("Inventory Quantity: $totalQuantity")
-        }
-     
+        var totalValue:String = "Inventory Value: $$totalValue\n"
+        var totalQuantity:String = "Inventory Quantity: $totalQuantity\n"
+        
+        // Writes data to a specified file
+        File(fileName).appendText(totalValue)
+        File(fileName).appendText(totalQuantity)
+    
+        
         // Reads data from a specified file and prints to screen
         val lines: List<String> = File(fileName).readLines()
         lines.forEach { line -> println(line) }
